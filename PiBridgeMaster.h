@@ -32,6 +32,8 @@
 
 #pragma once
 
+#include "IoProtocol.h"
+
 typedef enum _EPiBridgeMasterStatus {
 	// states for IO Protocol
 	enPiBridgeMasterStatus_Init,	// 0
@@ -74,6 +76,38 @@ typedef struct _SRevPiCoreImage {
 	INT16U i16uRS485ErrorLimit2;
 
 } __attribute__ ((__packed__)) SRevPiCoreImage;
+
+struct revpi_compact_image {
+	u8;			/* rx */
+	u8 i8uIOCycle;
+	u16;
+	u8 i8uCPUTemperature;
+	u8 i8uCPUFrequency;
+
+	INT8U i8uLED;		/* tx */
+	u16;
+	u16;
+};
+
+struct revpi_compact_image_dio_rx {
+	SDioModuleStatus dio_status;
+	u16 din;
+};
+
+struct revpi_compact_image_dio_tx {
+	u16 dout;
+};
+
+struct revpi_compact_image_aio_rx {
+	u8 aio_status;
+#define AIO_RX_ERR 0x80
+#define AIO_TX_ERR 0x40
+	u16 ain[8];
+};
+
+struct revpi_compact_image_aio_tx {
+	u16 aout[2];
+};
 
 void PiBridgeMaster_Reset(void);
 int PiBridgeMaster_Adjust(void);
