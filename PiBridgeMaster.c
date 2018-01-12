@@ -426,12 +426,13 @@ int PiBridgeMaster_Run(void)
 				bEntering_s = bFALSE;
 				piIoComm_writeSniff1B(enGpioValue_Low, enGpioMode_Input);
 			}
-			if (piIoComm_readSniff2A() == enGpioValue_High) {
+			if (piIoComm_readSniff2A() == enGpioValue_High || true) {
 				// configure first left slave
 				eRunStatus_s = enPiBridgeMasterStatus_ConfigLeftStart;
 				bEntering_s = bTRUE;
 			} else {
 				// no slave on the left side
+
 				eRunStatus_s = enPiBridgeMasterStatus_EndOfConfig;
 				bEntering_s = bTRUE;
 			}
