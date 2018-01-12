@@ -221,9 +221,8 @@ TBOOL RevPiDevice_writeNextConfiguration(INT8U i8uAddress_p, MODGATECOM_IDResp *
 #endif
 			}
 		}
-		return bFALSE;
 	}
-	return bTRUE;
+	return !!ret_l;
 }
 
 TBOOL RevPiDevice_writeNextConfigurationRight(void)
